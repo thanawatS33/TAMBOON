@@ -36,12 +36,16 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.0"
 
+    def localProperties = new Properties()
+    localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+
     defaultConfig {
         applicationId "com.example.tamboon"
         minSdkVersion 22
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        buildConfigField "String", "OMISE_SKEY", localProperties['OMISE_SKEY']
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
