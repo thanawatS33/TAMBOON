@@ -1,6 +1,6 @@
 package com.example.tamboon.di
 
-import com.example.constant.ApiConstant
+import com.example.tamboon.constant.ApiConstant
 import com.example.tamboon.data.api.ApiService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
