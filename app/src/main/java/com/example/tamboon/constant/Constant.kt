@@ -1,7 +1,7 @@
 package com.example.tamboon.constant
 
-class Constant {
+object Constant {
 
-
+    const val TEXT_ERROR = "Please Try Again"
 
 }
