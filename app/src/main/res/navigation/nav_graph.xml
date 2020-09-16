@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/charityListFragment"
-        android:name="com.example.tamboon.ui.charitylist.CharityListFragment"
+        android:name="com.example.tamboon.ui.charities.CharitiesFragment"
         android:label="CharityListFragment"
-        tools:layout="@layout/fragment_charitylist"/>
+        tools:layout="@layout/fragment_charities"/>
 
 </navigation>

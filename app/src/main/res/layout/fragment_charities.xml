@@ -5,7 +5,7 @@
     <data>
         <variable
             name="vm"
-            type="com.example.tamboon.ui.charitylist.CharityListViewModel" />
+            type="com.example.tamboon.ui.charities.CharitiesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
