@@ -1,10 +1,16 @@
 package com.example.tamboon.ui.donation
 
+import android.util.Log
 import androidx.lifecycle.*
+import com.example.tamboon.data.domain.GetIdTokenUseCase
 import com.example.tamboon.data.domain.ValidateCreditCardUseCase
 import com.example.tamboon.util.State
+import kotlinx.coroutines.launch
 
-class DonationViewModel(private val validateCreditCardUseCase: ValidateCreditCardUseCase) :
+class DonationViewModel(
+    private val validateCreditCardUseCase: ValidateCreditCardUseCase,
+    private val getIdTokenUseCase: GetIdTokenUseCase
+) :
     ViewModel() {
 
     val amount = MutableLiveData<String>()
@@ -12,6 +18,7 @@ class DonationViewModel(private val validateCreditCardUseCase: ValidateCreditCar
     val cardName = MutableLiveData<String>()
     val expireDate = MutableLiveData<String>()
     val securityCode = MutableLiveData<String>()
+    val donation: () -> Unit = this::donation
 
     private val isAmountValid: LiveData<State> = Transformations.map(amount) {
         if (it.isNullOrEmpty()) {
@@ -119,11 +126,18 @@ class DonationViewModel(private val validateCreditCardUseCase: ValidateCreditCar
                 && isSecurityCodeValid.value == State.VALID)
     }
 
-    val nameButtonPay : LiveData<String> = Transformations.map(amount) {
-        if (it.isNullOrEmpty()) {
-            "PAY"
-        } else {
-            "PAY ฿$it"
+    private fun donation() {
+        viewModelScope.launch {
+            val name = cardName.value ?: ""
+            val number = cardNumber.value ?: ""
+            val expireDate = expireDate.value ?: ""
+            val securityCode = securityCode.value ?: ""
+            val result = getIdTokenUseCase(name, number, expireDate, securityCode)
+            if (result.isSuccess) {
+                Log.i("id token", result.data.toString())
+            } else {
+                Log.i("id token error", result.message.toString())
+            }
         }
     }
 

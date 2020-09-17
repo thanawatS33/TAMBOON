@@ -1,6 +1,7 @@
 package com.example.tamboon.di
 
 import com.example.tamboon.data.domain.GetCharitiesUseCase
+import com.example.tamboon.data.domain.GetIdTokenUseCase
 import com.example.tamboon.data.domain.ValidateCreditCardUseCase
 import com.example.tamboon.data.repository.TamBoonRepository
 import com.example.tamboon.data.repository.TamBoonRepositoryImpl
@@ -15,7 +16,7 @@ val viewModelModule: Module = module {
         CharitiesViewModel(get())
     }
     viewModel {
-        DonationViewModel(get())
+        DonationViewModel(get(), get())
     }
 }
 
@@ -26,6 +27,7 @@ val repositoryModule: Module = module {
 val useCaseModule: Module = module {
     single { GetCharitiesUseCase(get()) }
     single { ValidateCreditCardUseCase() }
+    single { GetIdTokenUseCase(get()) }
 }
 
 val networkModule = module {
