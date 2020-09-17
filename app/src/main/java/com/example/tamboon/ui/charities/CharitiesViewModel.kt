@@ -4,8 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tamboon.data.domain.GetCharitiesUseCase
-import com.example.tamboon.data.model.CharitiesResponseModel
-import com.example.tamboon.data.model.CharityModel
+import com.example.tamboon.data.model.response.CharityModel
 import kotlinx.coroutines.launch
 
 class CharitiesViewModel(private val getCharitiesUseCase: GetCharitiesUseCase) : ViewModel() {

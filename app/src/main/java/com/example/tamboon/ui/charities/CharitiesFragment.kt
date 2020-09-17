@@ -1,7 +1,13 @@
 package com.example.tamboon.ui.charities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment.findNavController
+import co.omise.android.ui.CreditCardActivity
+import co.omise.android.ui.OmiseActivity
+import com.example.tamboon.BuildConfig
 import com.example.tamboon.R
 import com.example.tamboon.databinding.FragmentCharitiesBinding
 import com.example.tamboon.ui.base.BaseFragment
@@ -13,7 +19,7 @@ class CharitiesFragment : BaseFragment<FragmentCharitiesBinding>() {
 
     private val vm: CharitiesViewModel by viewModel()
     private val charitiesAdapter by lazy {
-        CharitiesAdapter()
+        CharitiesAdapter(this::onClickItem)
     }
 
     override fun getLayout() = R.layout.fragment_charities
@@ -25,10 +31,13 @@ class CharitiesFragment : BaseFragment<FragmentCharitiesBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.adapter = charitiesAdapter
-        vm.currentList.observe(viewLifecycleOwner,{
+        vm.currentList.observe(viewLifecycleOwner, {
             charitiesAdapter.setData(it)
         })
     }
 
+    private fun onClickItem(id: Int) {
+        findNavController(this).navigate(R.id.action_charityListFragment_to_donationFragment)
+    }
 
 }

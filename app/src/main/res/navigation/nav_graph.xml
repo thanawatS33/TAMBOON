@@ -9,6 +9,18 @@
         android:id="@+id/charityListFragment"
         android:name="com.example.tamboon.ui.charities.CharitiesFragment"
         android:label="CharityListFragment"
-        tools:layout="@layout/fragment_charities"/>
+        tools:layout="@layout/fragment_charities">
+
+        <action
+            android:id="@+id/action_charityListFragment_to_donationFragment"
+            app:destination="@id/donationFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/donationFragment"
+        android:name="com.example.tamboon.ui.donation.DonationFragment"
+        android:label="DonationFragment"
+        tools:layout="@layout/fragment_donation" />
 
 </navigation>

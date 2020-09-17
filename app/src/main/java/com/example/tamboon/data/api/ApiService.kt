@@ -1,9 +1,8 @@
 package com.example.tamboon.data.api
 
 import com.example.tamboon.constant.ApiConstant
-import com.example.tamboon.data.model.CharitiesResponseModel
+import com.example.tamboon.data.model.response.CharitiesResponseModel
 import retrofit2.http.GET
-import retrofit2.http.Query
 
 interface ApiService {
 

@@ -1,8 +1,8 @@
 package com.example.tamboon.data.domain
 
-import com.example.tamboon.data.model.CharitiesResponseModel
+import com.example.tamboon.data.model.response.CharitiesResponseModel
 import com.example.tamboon.data.repository.TamBoonRepository
-import com.example.tamboon.util.ResultResponse
+import com.example.tamboon.data.model.ResultResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

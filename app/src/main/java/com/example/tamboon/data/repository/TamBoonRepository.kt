@@ -2,8 +2,8 @@ package com.example.tamboon.data.repository
 
 import com.example.tamboon.constant.Constant
 import com.example.tamboon.data.api.ApiService
-import com.example.tamboon.data.model.CharitiesResponseModel
-import com.example.tamboon.util.ResultResponse
+import com.example.tamboon.data.model.response.CharitiesResponseModel
+import com.example.tamboon.data.model.ResultResponse
 import java.lang.Exception
 
 interface TamBoonRepository {

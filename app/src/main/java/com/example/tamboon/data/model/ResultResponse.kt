@@ -1,4 +1,4 @@
-package com.example.tamboon.util
+package com.example.tamboon.data.model
 
 data class ResultResponse<T>(val isSuccess: Boolean, val message: String?, val data: T?) {
     companion object {

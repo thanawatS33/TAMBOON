@@ -4,9 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tamboon.R
-import com.example.tamboon.data.model.CharityModel
+import com.example.tamboon.data.model.response.CharityModel
 
-class CharitiesAdapter : RecyclerView.Adapter<CharitiesViewHolder>() {
+class CharitiesAdapter(private val onClickItem: (id: Int) -> Unit) :
+    RecyclerView.Adapter<CharitiesViewHolder>() {
 
     private var item: List<CharityModel> = listOf()
 
@@ -18,7 +19,7 @@ class CharitiesAdapter : RecyclerView.Adapter<CharitiesViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: CharitiesViewHolder, position: Int) {
-        holder.bindData(item[position])
+        holder.bindData(item[position], onClickItem)
     }
 
     override fun getItemCount() = item.size

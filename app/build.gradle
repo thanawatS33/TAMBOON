@@ -24,6 +24,8 @@ ext {
 
     glideVersion = '4.11.0'
 
+    omiseVersion = '3.1.2'
+
     junitVersion = '4.12'
     junitExtVersion = '1.1.2'
     espressoVersion = '3.3.0'
@@ -48,6 +50,7 @@ android {
         versionCode 1
         versionName "1.0"
         buildConfigField "String", "OMISE_SKEY", localProperties['OMISE_SKEY']
+        buildConfigField "String", "OMISE_PKEY", localProperties['OMISE_PKEY']
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -104,6 +107,9 @@ dependencies {
     //Glide
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
+
+    //Omise
+    implementation "co.omise:omise-android:$omiseVersion"
 
     //Test
     testImplementation "junit:junit:$junitVersion"

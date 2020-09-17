@@ -1,4 +1,4 @@
-package com.example.tamboon.data.model
+package com.example.tamboon.data.model.response
 
 import com.google.gson.annotations.SerializedName
 
