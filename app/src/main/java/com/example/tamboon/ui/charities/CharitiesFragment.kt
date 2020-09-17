@@ -12,6 +12,7 @@ import com.example.tamboon.R
 import com.example.tamboon.databinding.FragmentCharitiesBinding
 import com.example.tamboon.ui.base.BaseFragment
 import com.example.tamboon.ui.charities.adapter.CharitiesAdapter
+import com.example.tamboon.util.LoadingState
 import kotlinx.android.synthetic.main.fragment_charities.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -33,6 +34,13 @@ class CharitiesFragment : BaseFragment<FragmentCharitiesBinding>() {
         recyclerView.adapter = charitiesAdapter
         vm.currentList.observe(viewLifecycleOwner, {
             charitiesAdapter.setData(it)
+        })
+        vm.loading.observe(viewLifecycleOwner, {
+            if (it == LoadingState.LOADING) {
+                showLoading()
+            } else {
+                hideLoading()
+            }
         })
     }
 

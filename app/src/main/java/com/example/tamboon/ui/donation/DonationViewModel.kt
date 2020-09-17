@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.example.tamboon.data.domain.GetIdTokenUseCase
 import com.example.tamboon.data.domain.ValidateCreditCardUseCase
+import com.example.tamboon.util.LoadingState
 import com.example.tamboon.util.State
 import kotlinx.coroutines.launch
 
@@ -19,6 +20,7 @@ class DonationViewModel(
     val expireDate = MutableLiveData<String>()
     val securityCode = MutableLiveData<String>()
     val donation: () -> Unit = this::donation
+    val loading = MutableLiveData<LoadingState>()
 
     private val isAmountValid: LiveData<State> = Transformations.map(amount) {
         if (it.isNullOrEmpty()) {
@@ -128,11 +130,13 @@ class DonationViewModel(
 
     private fun donation() {
         viewModelScope.launch {
+            loading.value = LoadingState.LOADING
             val name = cardName.value ?: ""
             val number = cardNumber.value ?: ""
             val expireDate = expireDate.value ?: ""
             val securityCode = securityCode.value ?: ""
             val result = getIdTokenUseCase(name, number, expireDate, securityCode)
+            loading.value = LoadingState.LOADED
             if (result.isSuccess) {
                 Log.i("id token", result.data.toString())
             } else {

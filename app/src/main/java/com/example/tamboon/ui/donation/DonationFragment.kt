@@ -6,6 +6,7 @@ import co.omise.android.models.CardBrand
 import com.example.tamboon.R
 import com.example.tamboon.databinding.FragmentDonationBinding
 import com.example.tamboon.ui.base.BaseFragment
+import com.example.tamboon.util.LoadingState
 import com.example.tamboon.util.extension.setCreditCardFormat
 import com.example.tamboon.util.extension.setExpireDateFormat
 import kotlinx.android.synthetic.main.fragment_donation.*
@@ -24,6 +25,13 @@ class DonationFragment : BaseFragment<FragmentDonationBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        vm.loading.observe(viewLifecycleOwner, {
+            if (it == LoadingState.LOADING) {
+                showLoading()
+            } else {
+                hideLoading()
+            }
+        })
     }
 
     private fun initView() {
