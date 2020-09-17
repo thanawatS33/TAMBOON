@@ -4,6 +4,8 @@ import android.text.Editable
 import android.text.InputFilter
 import android.text.InputType
 import android.text.TextWatcher
+import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import com.google.android.material.textfield.TextInputEditText
 
@@ -62,4 +64,19 @@ fun TextInputEditText.setExpireDateFormat() {
         }
 
     })
+}
+
+fun TextInputEditText.hideKeyboardOnEditorEnterAction() {
+    setOnEditorActionListener { v, actionId, event ->
+        val imeAction = when (actionId) {
+            EditorInfo.IME_ACTION_DONE -> true
+            else -> false
+        }
+        val keydownEvent = event?.keyCode == KeyEvent.KEYCODE_ENTER
+        if (imeAction or keydownEvent) {
+            dismissKeyboard()
+            clearFocus()
+            true
+        } else false
+    }
 }

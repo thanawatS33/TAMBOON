@@ -7,6 +7,7 @@ import com.example.tamboon.R
 import com.example.tamboon.databinding.FragmentDonationBinding
 import com.example.tamboon.ui.base.BaseFragment
 import com.example.tamboon.util.LoadingState
+import com.example.tamboon.util.extension.hideKeyboardOnEditorEnterAction
 import com.example.tamboon.util.extension.setCreditCardFormat
 import com.example.tamboon.util.extension.setExpireDateFormat
 import kotlinx.android.synthetic.main.fragment_donation.*
@@ -66,6 +67,7 @@ class DonationFragment : BaseFragment<FragmentDonationBinding>() {
             }
         }
         securityCodeEditText.apply {
+            hideKeyboardOnEditorEnterAction()
             setOnFocusChangeListener { _, isFocus ->
                 if (!isFocus) {
                     vm.securityCode.value = securityCodeEditText.text.toString()

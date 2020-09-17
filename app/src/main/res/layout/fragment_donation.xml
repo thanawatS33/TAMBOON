@@ -82,6 +82,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="FULL NAME"
+                    android:maxLines="1"
                     android:text="@{vm.cardName}" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -135,10 +136,10 @@
                 android:layout_height="wrap_content"
                 android:enabled="@{vm.isAllFormValid}"
                 android:text="PAY"
-                app:onClickAction="@{vm.donation}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layoutSecurityCode" />
+                app:layout_constraintTop_toBottomOf="@id/layoutSecurityCode"
+                app:onClickAction="@{vm.donation}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
