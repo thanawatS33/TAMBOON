@@ -2,15 +2,18 @@ package com.example.tamboon.ui.donation
 
 import android.util.Log
 import androidx.lifecycle.*
+import com.example.tamboon.data.domain.DonationsUseCase
 import com.example.tamboon.data.domain.GetIdTokenUseCase
 import com.example.tamboon.data.domain.ValidateCreditCardUseCase
+import com.example.tamboon.data.model.request.DonationsRequest
 import com.example.tamboon.util.LoadingState
 import com.example.tamboon.util.State
 import kotlinx.coroutines.launch
 
 class DonationViewModel(
     private val validateCreditCardUseCase: ValidateCreditCardUseCase,
-    private val getIdTokenUseCase: GetIdTokenUseCase
+    private val getIdTokenUseCase: GetIdTokenUseCase,
+    private val donationsUseCase: DonationsUseCase
 ) :
     ViewModel() {
 
@@ -136,10 +139,20 @@ class DonationViewModel(
             val expireDate = expireDate.value ?: ""
             val securityCode = securityCode.value ?: ""
             val result = getIdTokenUseCase(name, number, expireDate, securityCode)
-            loading.value = LoadingState.LOADED
             if (result.isSuccess) {
                 Log.i("id token", result.data.toString())
+                val id = result.data ?: ""
+                val amount = amount.value?.toInt() ?: 0
+                val request = DonationsRequest(name, id, amount)
+                val resultDonation = donationsUseCase(request)
+                loading.value = LoadingState.LOADED
+                if (resultDonation.isSuccess) {
+                    Log.i("success", result.data.toString())
+                } else {
+                    Log.i("id token error", resultDonation.message.toString())
+                }
             } else {
+                loading.value = LoadingState.LOADED
                 Log.i("id token error", result.message.toString())
             }
         }

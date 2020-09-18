@@ -1,5 +1,6 @@
 package com.example.tamboon.di
 
+import com.example.tamboon.data.domain.DonationsUseCase
 import com.example.tamboon.data.domain.GetCharitiesUseCase
 import com.example.tamboon.data.domain.GetIdTokenUseCase
 import com.example.tamboon.data.domain.ValidateCreditCardUseCase
@@ -16,18 +17,19 @@ val viewModelModule: Module = module {
         CharitiesViewModel(get())
     }
     viewModel {
-        DonationViewModel(get(), get())
+        DonationViewModel(get(), get(), get())
     }
 }
 
 val repositoryModule: Module = module {
-    single<TamBoonRepository> { TamBoonRepositoryImpl(get()) }
+    single<TamBoonRepository> { TamBoonRepositoryImpl(get(), get()) }
 }
 
 val useCaseModule: Module = module {
     single { GetCharitiesUseCase(get()) }
     single { ValidateCreditCardUseCase() }
     single { GetIdTokenUseCase(get()) }
+    single { DonationsUseCase(get()) }
 }
 
 val networkModule = module {
