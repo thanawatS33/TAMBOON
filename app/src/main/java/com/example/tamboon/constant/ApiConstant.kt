@@ -6,4 +6,6 @@ object ApiConstant {
 
     const val API_CHARITIES = "charities"
 
+    const val API_DONATIONS = "donations"
+
 }
