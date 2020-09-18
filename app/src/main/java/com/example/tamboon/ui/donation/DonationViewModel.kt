@@ -24,6 +24,7 @@ class DonationViewModel(
     val securityCode = MutableLiveData<String>()
     val donation: () -> Unit = this::donation
     val loading = MutableLiveData<LoadingState>()
+    val openSuccessScreen = MutableLiveData<String>()
 
     private val isAmountValid: LiveData<State> = Transformations.map(amount) {
         if (it.isNullOrEmpty()) {
@@ -147,7 +148,7 @@ class DonationViewModel(
                 val resultDonation = donationsUseCase(request)
                 loading.value = LoadingState.LOADED
                 if (resultDonation.isSuccess) {
-                    Log.i("success", result.data.toString())
+                    openSuccessScreen.value = ""
                 } else {
                     Log.i("id token error", resultDonation.message.toString())
                 }

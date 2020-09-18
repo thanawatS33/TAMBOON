@@ -2,7 +2,7 @@ package com.example.tamboon.ui.donation
 
 import android.os.Bundle
 import android.view.View
-import co.omise.android.models.CardBrand
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.example.tamboon.R
 import com.example.tamboon.databinding.FragmentDonationBinding
 import com.example.tamboon.ui.base.BaseFragment
@@ -32,6 +32,9 @@ class DonationFragment : BaseFragment<FragmentDonationBinding>() {
             } else {
                 hideLoading()
             }
+        })
+        vm.openSuccessScreen.observe(viewLifecycleOwner, {
+            findNavController(this).navigate(R.id.action_donationFragment_to_successFragment)
         })
     }
 

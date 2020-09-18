@@ -8,6 +8,7 @@ import com.example.tamboon.data.repository.TamBoonRepository
 import com.example.tamboon.data.repository.TamBoonRepositoryImpl
 import com.example.tamboon.ui.charities.CharitiesViewModel
 import com.example.tamboon.ui.donation.DonationViewModel
+import com.example.tamboon.ui.success.SuccessViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -18,6 +19,9 @@ val viewModelModule: Module = module {
     }
     viewModel {
         DonationViewModel(get(), get(), get())
+    }
+    viewModel {
+        SuccessViewModel()
     }
 }
 
