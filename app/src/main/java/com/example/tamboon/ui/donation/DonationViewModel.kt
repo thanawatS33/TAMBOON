@@ -1,7 +1,7 @@
 package com.example.tamboon.ui.donation
 
-import android.util.Log
 import androidx.lifecycle.*
+import com.example.tamboon.constant.Constant
 import com.example.tamboon.data.domain.DonationsUseCase
 import com.example.tamboon.data.domain.GetIdTokenUseCase
 import com.example.tamboon.data.domain.ValidateCreditCardUseCase
@@ -25,6 +25,7 @@ class DonationViewModel(
     val donation: () -> Unit = this::donation
     val loading = MutableLiveData<LoadingState>()
     val openSuccessScreen = MutableLiveData<String>()
+    val openDialog = MutableLiveData<String>()
 
     private val isAmountValid: LiveData<State> = Transformations.map(amount) {
         if (it.isNullOrEmpty()) {
@@ -141,7 +142,6 @@ class DonationViewModel(
             val securityCode = securityCode.value ?: ""
             val result = getIdTokenUseCase(name, number, expireDate, securityCode)
             if (result.isSuccess) {
-                Log.i("id token", result.data.toString())
                 val id = result.data ?: ""
                 val amount = amount.value?.toInt() ?: 0
                 val request = DonationsRequest(name, id, amount)
@@ -150,11 +150,11 @@ class DonationViewModel(
                 if (resultDonation.isSuccess) {
                     openSuccessScreen.value = ""
                 } else {
-                    Log.i("id token error", resultDonation.message.toString())
+                    openDialog.value = resultDonation.message ?: Constant.TEXT_ERROR
                 }
             } else {
                 loading.value = LoadingState.LOADED
-                Log.i("id token error", result.message.toString())
+                openDialog.value = result.message ?: Constant.TEXT_ERROR
             }
         }
     }

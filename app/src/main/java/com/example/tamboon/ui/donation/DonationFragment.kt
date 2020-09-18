@@ -1,5 +1,6 @@
 package com.example.tamboon.ui.donation
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.NavHostFragment.findNavController
@@ -12,6 +13,7 @@ import com.example.tamboon.util.extension.setCreditCardFormat
 import com.example.tamboon.util.extension.setExpireDateFormat
 import kotlinx.android.synthetic.main.fragment_donation.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class DonationFragment : BaseFragment<FragmentDonationBinding>() {
 
@@ -35,6 +37,9 @@ class DonationFragment : BaseFragment<FragmentDonationBinding>() {
         })
         vm.openSuccessScreen.observe(viewLifecycleOwner, {
             findNavController(this).navigate(R.id.action_donationFragment_to_successFragment)
+        })
+        vm.openDialog.observe(viewLifecycleOwner, { message ->
+            showDialog(message)
         })
     }
 
@@ -77,5 +82,17 @@ class DonationFragment : BaseFragment<FragmentDonationBinding>() {
                 }
             }
         }
+    }
+
+    private fun showDialog(message: String) {
+        val builder = AlertDialog.Builder(context)
+        builder.setCancelable(false)
+        builder.setTitle("System alert")
+        builder.setMessage(message)
+        builder.setPositiveButton("OK") { dialog, _ ->
+            dialog.dismiss()
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 }
